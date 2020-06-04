@@ -28,6 +28,14 @@ namespace WordCount.Controllers
             return View();
         }
 
+        public IActionResult WordCount()
+        {
+            var model = new CountWord().Add("test", 5);
+            model.Add("book", 5);
+
+            return View(model);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

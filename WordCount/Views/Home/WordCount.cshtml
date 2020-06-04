@@ -1,0 +1,27 @@
+﻿@{ ViewBag.Title = "New"; var first = Guid.NewGuid(); var second = Guid.NewGuid(); }
+
+<h1>WordCount</h1>
+
+<h2>New</h2>
+
+@using (Html.BeginForm(new { action = "create", controller = "home" }))
+{
+    foreach (var kvp in Model.Values)
+    {
+        <p>
+            <input type="text" name="Model.Values[@first].Key" value="@kvp.Key" />
+            <input type="text" name="Model.Values[@first].Value" value="@kvp.Value" />
+            <input type="hidden" name="Model.Values.Index" value="@first" />
+        </p>
+    }
+
+    <p>
+        <input type="text" name="Model.Values[@second].Key" value="" />
+        <input type="text" name="Model.Values[@second].Value" value="" />
+        <input type="hidden" name="Model.Values.Index" value="@second" />
+    </p>
+
+    <p>
+        <input type="submit" value="Submit" />
+    </p>
+}
