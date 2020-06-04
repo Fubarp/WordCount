@@ -33,6 +33,8 @@ namespace WordCount.Controllers
             var model = new CountWord().Add("test", 5);
             model.Add("book", 5);
 
+            model.StopWord();
+
             return View(model);
         }
 

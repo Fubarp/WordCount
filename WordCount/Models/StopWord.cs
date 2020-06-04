@@ -6,24 +6,24 @@ using System.Threading.Tasks;
 
 namespace WordCount.Models
 {
-    public class CountWord
+    public class StopWord
     {
-        public CountWord()
+        public StopWord()
         {
             Values = new Dictionary<string, int>();
         }
 
         public Dictionary<string, int> Values { get; set; }
 
-        public CountWord Add(string key, int value)
+        public StopWord Add(string key, int value)
         {
             Values.Add(key, value);
             return this;
         }
 
-        public CountWord StopWord()
+        public StopWord Test()
         {
-            var model = new CountWord();
+            var model = new StopWord();
             FileStream fileStream = new FileStream("stop-words.txt", FileMode.Open);
             using (StreamReader reader = new StreamReader(fileStream))
             {
@@ -34,5 +34,4 @@ namespace WordCount.Models
             return model;
         }
     }
-
 }
