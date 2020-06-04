@@ -21,18 +21,21 @@ namespace WordCount.Models
             return this;
         }
 
-        public CountWord StopWord()
+        public CountWord CreateString()
         {
-            var model = new CountWord();
             FileStream fileStream = new FileStream("stop-words.txt", FileMode.Open);
             using (StreamReader reader = new StreamReader(fileStream))
             {
-                Console.WriteLine("This is C#");
-                string test = reader.ReadLine();
+                while (reader.Peek() != -1)
+                {
+                    Debug.WriteLine("Reading stuff");
+                    this.Add(reader.ReadLine());
+                }
             }
 
-            return model;
+            return this;
         }
+
     }
 
 }
