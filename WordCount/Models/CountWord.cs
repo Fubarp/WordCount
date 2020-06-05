@@ -70,7 +70,6 @@ namespace WordCount.Models
 
             return this;
         }
-
     }
 
 }

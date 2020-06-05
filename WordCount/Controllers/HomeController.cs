@@ -30,15 +30,11 @@ namespace WordCount.Controllers
 
         public IActionResult WordCount()
         {
-            //var model = new CountWord().Add("test", 5);
-            //model.Add("book", 5);
-
             var stopSet = new StopWord();
             stopSet.fileToHashSet();
 
             var model = new CountWord();
             model.CreateString(stopSet);
-
 
             return View(model);
         }

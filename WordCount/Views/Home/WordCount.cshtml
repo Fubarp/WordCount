@@ -1,4 +1,6 @@
-﻿@{ ViewBag.Title = "New"; var first = Guid.NewGuid(); var second = Guid.NewGuid(); }
+﻿@model CountWord
+
+@{ ViewBag.Title = "New"; var first = Guid.NewGuid(); var second = Guid.NewGuid(); }
 
 <h1>WordCount</h1>
 
@@ -6,7 +8,7 @@
 
 @using (Html.BeginForm(new { action = "create", controller = "home" }))
 {
-    foreach (var kvp in Model.Values)
+    foreach (var kvp in Model.Values.OrderByDescending(kv => kv.Value).ThenBy(kv => kv.Key).Take(100))
     {
         <p>
             <input type="text" name="Model.Values[@first].Key" value="@kvp.Key" />
