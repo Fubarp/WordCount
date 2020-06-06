@@ -26,11 +26,6 @@ namespace WordCount.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
         public IActionResult WordCount()
         {
             var stopSet = new StopWord();

@@ -2,7 +2,42 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h1 id="wordcount">WordCount</h1>
+<p>Welcome to WordCount. The Web Application that can take in a book and return the top 100 words with a nice pie graph. </p>
+<h2 id="project-layout-mvc">Project Layout - MVC</h2>
+<ul>
+    <li>
+        Controller<ul>
+            <li>HomeController.cs</li>
+        </ul>
+    </li>
+    <li>
+        Models<ul>
+            <li>Countword.cs</li>
+            <li>Stopword.cs</li>
+        </ul>
+    </li>
+    <li>
+        Views<ul>
+            <li>Index</li>
+            <li>WordCount</li>
+        </ul>
+    </li>
+    <li>
+        Files<ul>
+            <li>stop-word.txt</li>
+            <li>mobydick.txt</li>
+            <li>testFile.txt</li>
+        </ul>
+    </li>
+</ul>
+<h2 id="logic-design">Logic/Design</h2>
+<p> Design has 1 controller that does all the calls to models. This <strong>IActionResult WordCount</strong> will first create the StopWord hashSet and pass that onto Countword which creates a Dictionary of all the words in the book while excluding any word found in StopWord. Once that dictionary is created it passes it onto the model for processing and displaying.</p>
+<p><strong>CountWord CreateString</strong> is the helper method that creates the Dictionary inside CountWord. It reads the file and uses a regex pattern to find all the words without any special characters, except for -_ and &#39;. Though because of some technical problems within the book itself, a catch was created to make sure &#39; was not added to the dictionary. One the a word is matched, it verifies that it doesnt already exist in the dictionary and adds it and sets the value to 1. If it already exists, it increases the value by 1. </p>
+<p>The View page WordCount, takes in the Model, and restructures it in descending order, then only passes on the top 100 words used. From here we pass the information to a JavaScript Pie, and to a List to show all the words and their values. </p>
+<h2 id="potential-problems">Potential Problems</h2>
+<p>My Count returns Whale at 910 times. But using things like Notepad++, and Google Docs, along with sites like <a href="https://roadtolarissa.com/whalewords/">https://roadtolarissa.com/whalewords/</a> and of course google. Problem I&#39;ve come to find out is that my count is smaller then others. But at the same time I can verify that my count is not accurate as I can&#39;t validate how the whalewords site validates words, and on Notepad++/Google Docs, they will count words like. WhaleMan as whale even though I ask for exact.</p>
+<h2 id="testing">Testing</h2>
+<p>I contemplated making a second project to create Unit Tests for my Controller/Model but I decided against it under the pretext that I had been manually testing my code as I went through. The Unit tests would be beneficial if I could prove that the methods used were accurate but because my own tests would just be handcrafted to past the best I could show was that the Functions worked as intended but would not prove that the Functions were accurate. As such I decided to ignore basic Unit Testing and Integration Testing. </p>
+<h2 id="sources">Sources</h2>
+<p><a href="https://www.chartjs.org/docs/latest/">https://www.chartjs.org/docs/latest/</a></p>
