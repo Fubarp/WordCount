@@ -1,14 +1,61 @@
 ﻿@model CountWord
 
-@{ ViewBag.Title = "New"; var first = Guid.NewGuid(); var second = Guid.NewGuid(); }
-
+@{ 
+    ViewBag.Title = "New"; 
+    var first = Guid.NewGuid();  
+    var list = Model.Values.OrderByDescending(kv => kv.Value).ThenBy(kv => kv.Key).Take(100);
+    
+}
+<canvas id="myChart"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <h1>WordCount</h1>
-
-<h2>New</h2>
 
 @using (Html.BeginForm(new { action = "create", controller = "home" }))
 {
-    foreach (var kvp in Model.Values.OrderByDescending(kv => kv.Value).ThenBy(kv => kv.Key).Take(100))
+
+<script>
+    var json = @Json.Serialize(list);
+
+
+    function getRandomRgb() {
+        var r = Math.floor(Math.random() * 256);
+        var g = Math.floor(Math.random() * 256);
+        var b = Math.floor(Math.random() * 256); 
+        return 'rgb(' + r + ', ' + g + ', ' + b + ')';
+    }
+
+    var labels = [];
+    var wordCounts = [];
+    var colors = [];
+    json.map(function(kvp, key) {
+        labels.push(kvp.Key);
+        wordCounts.push(kvp.Value);
+        colors.push(getRandomRgb());
+    });
+
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'pie',
+
+        // The data for our dataset
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Word Count List',
+                backgroundColor: colors,
+                borderColor: colors,
+                data: wordCounts
+            }]
+        },
+
+        // Configuration options go here
+        options: {}
+    });
+</script>
+
+    foreach (var kvp in list)
     {
         <p>
             <input type="text" name="Model.Values[@first].Key" value="@kvp.Key" />
@@ -17,13 +64,4 @@
         </p>
     }
 
-    <p>
-        <input type="text" name="Model.Values[@second].Key" value="" />
-        <input type="text" name="Model.Values[@second].Value" value="" />
-        <input type="hidden" name="Model.Values.Index" value="@second" />
-    </p>
-
-    <p>
-        <input type="submit" value="Submit" />
-    </p>
 }

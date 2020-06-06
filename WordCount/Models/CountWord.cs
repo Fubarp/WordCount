@@ -22,38 +22,25 @@ namespace WordCount.Models
             Values.Add(key, value);
             return this;
         }
-        //[-_A-Za-z0-9^’]+
+
+
         public CountWord CreateString(StopWord stopWord)
         {
-            //Regex regex = new Regex(@"[-_A-Za-z0-9^’]+");
             String line = "";
-            FileStream fileStream = new FileStream("testFile.txt", FileMode.Open);
+            FileStream fileStream = new FileStream("mobydick.txt", FileMode.Open);
             using (StreamReader reader = new StreamReader(fileStream))
             {
                 while ((line = reader.ReadLine()) != null)
                 {
                     if(line == "")
                     { continue; }
-                    //Debug.WriteLine("Reading stuff");
-                    //this.Add(reader.ReadLine());
+                    string pattern = "[^-_A-Za-z0-9^’]+";
 
-                    //Match match = regex.Match(line);
-                    //if (match.Success)
-                    //{
-                    //    // Write original line and the value.
-                    //    string[] v = match.Value.Split();
-                    //    Debug.WriteLine(line);
-                    //    Debug.WriteLine("... " + v[]);
-                    //}
-
-                    //string input = "plum-pear";
-                    string pattern = "[^-_A-Za-z0-9’]+";
-
-                    string[] substrings = Regex.Split(line, pattern);    // Split on hyphens
+                    string[] substrings = Regex.Split(line, pattern); 
                     foreach (string match in substrings)
                     {
                         String matchWord = match.ToLower();
-                        if(match != "" && !stopWord.Values.Contains(matchWord))
+                        if(match != "" && !stopWord.Values.Contains(matchWord) && match != "’")
                         {
                             if (!this.Values.ContainsKey(matchWord))
                             {
@@ -67,6 +54,8 @@ namespace WordCount.Models
                     }
                 }
             }
+
+            fileStream.Close();
 
             return this;
         }

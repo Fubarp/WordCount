@@ -34,6 +34,8 @@ namespace WordCount.Models
                 }
             }
 
+            fileStream.Close();
+
             return this;
         }
     }
