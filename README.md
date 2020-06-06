@@ -31,5 +31,8 @@ My Count returns Whale at 910 times. But using things like Notepad++, and Google
 ## Testing
 I contemplated making a second project to create Unit Tests for my Controller/Model but I decided against it under the pretext that I had been manually testing my code as I went through. The Unit tests would be beneficial if I could prove that the methods used were accurate but because my own tests would just be handcrafted to past the best I could show was that the Functions worked as intended but would not prove that the Functions were accurate. As such I decided to ignore basic Unit Testing and Integration Testing. 
 
+## Editing
+I edited the Mobydick book. I removed everything before Chapter 1, and everything after the Epilogue was done. This was done as there was a lot of quotes and random things before the book started and after it ended that I didn't really consider actually part of the book. 
+
 ## Sources
 https://www.chartjs.org/docs/latest/
