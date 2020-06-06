@@ -29,13 +29,9 @@ namespace WordCount.Models
             {
                while(reader.Peek() != -1)
                 {
-                    Debug.WriteLine("Reading stuff");
                     this.Add(reader.ReadLine());
                 }
             }
-
-            fileStream.Close();
-
             return this;
         }
     }
